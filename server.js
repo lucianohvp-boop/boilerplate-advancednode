@@ -6,6 +6,7 @@ const myDB = require('./connection');
 const fccTesting = require('./freeCodeCamp/fcctesting.js');
 const session = require('express-session');
 const passport = require('passport');
+const { ObjectID } = require('mongodb');
 
 const app = express();
 app.use(cors());
@@ -21,7 +22,15 @@ app.use(session({
   cookie: { secure: false }
 }));
 app.use(passport.initialize());              
-app.use(passport.session());                 
+app.use(passport.session());       
+
+passport.serializeUser((user, done) => {    
+  done(null, user._id);
+});
+
+passport.deserializeUser((id, done) => {    
+  done(null, null);
+});
 
 app.set('view engine', 'pug');
 app.set('views', './views/pug');

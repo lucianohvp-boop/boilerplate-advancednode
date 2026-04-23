@@ -33,10 +33,10 @@ passport.deserializeUser((id, done) => {
 });
 
 app.set('view engine', 'pug');
-app.set('views', './views/pug');
+app.set('views', './views');
 
 app.route('/').get((req, res) => {
-res.render('index', { title: 'Hello', message: 'Please log in' });
+res.render('pug/index', { title: 'Hello', message: 'Please log in' });
 });
 
 const PORT = process.env.PORT || 3000;
